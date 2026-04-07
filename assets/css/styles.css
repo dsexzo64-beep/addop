@@ -376,8 +376,10 @@ html {
   width: 100%;
   box-sizing: border-box;
   position: relative;
-  min-height: 4rem;
+  min-height: 3rem;
   padding-inline: 0.5rem;
+  /* absolute .pets-event-banner не в потоке — отступ снизу, чтобы не перекрывать поиск/фильтры */
+  padding-bottom: clamp(5.75rem, 19vw, 9.25rem);
 }
 
 .pets-page-header-row .css-1s9o2ew {
@@ -387,7 +389,7 @@ html {
 
 .pets-event-banner {
   position: absolute;
-  top: 0.35rem;
+  top: 0;
   left: 50%;
   right: auto;
   transform: translateX(-50%);
@@ -434,6 +436,7 @@ html {
   .pets-page-header-row {
     flex-wrap: wrap;
     min-height: 0;
+    padding-bottom: 0;
   }
 
   .pets-event-banner {
@@ -444,6 +447,7 @@ html {
     width: 100%;
     max-width: 100%;
     margin-top: 0.35rem;
+    margin-bottom: 0.5rem;
     margin-left: 0;
     text-align: center;
     pointer-events: none;
