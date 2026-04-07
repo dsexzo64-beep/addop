@@ -12,7 +12,7 @@
   function tick() {
     var left = end - Date.now();
     if (left <= 0) {
-      el.textContent = "0д 00ч 00м 00с";
+      el.textContent = "0d 00h 00m 00s";
       return;
     }
     var totalSec = Math.floor(left / 1000);
@@ -20,7 +20,7 @@
     var m = Math.floor(totalSec / 60) % 60;
     var h = Math.floor(totalSec / 3600) % 24;
     var d = Math.floor(totalSec / (24 * 3600));
-    el.textContent = d + "д " + pad(h) + "ч " + pad(m) + "м " + pad(s) + "с";
+    el.textContent = d + "d " + pad(h) + "h " + pad(m) + "m " + pad(s) + "s";
   }
 
   tick();
