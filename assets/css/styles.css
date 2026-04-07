@@ -446,3 +446,24 @@ html {
     margin-top: 0;
   }
 }
+
+/* Single-page pets-only layout (no global navbar) */
+body.pets-page-only .css-hl3hcg {
+  margin-top: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+body.pets-page-only .css-1s9o2ew {
+  margin-left: 0 !important;
+}
+
+body.pets-page-only .pets-page-header-row {
+  padding-right: min(22rem, 46vw);
+}
+
+@media (max-width: 426px) {
+  body.pets-page-only .pets-event-banner {
+    margin-left: 0;
+  }
+}
