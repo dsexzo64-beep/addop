@@ -478,3 +478,277 @@ body.pets-page-only .pets-page-header-row {
     margin-left: 0;
   }
 }
+
+/* —— Pet selection + Get flow —— */
+.pet-card-selectable {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.12s ease, filter 0.12s ease;
+}
+
+.pet-card-selectable:focus-visible {
+  outline: 3px solid var(--color-theme-primary, #00a0df);
+  outline-offset: 3px;
+}
+
+.pet-card-selectable.is-selected figure {
+  border-radius: 18px;
+  box-shadow:
+    0 0 0 3px #fff,
+    0 0 0 6px var(--color-theme-secondary, #e81f76),
+    0 10px 28px rgba(232, 31, 118, 0.35);
+  transition: box-shadow 0.15s ease;
+}
+
+.pet-get-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1600;
+  padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom, 0));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.96));
+  border-top: 2px solid var(--color-theme-secondary, #e81f76);
+  box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.08);
+}
+
+.pet-get-bar-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.pet-get-count {
+  font-family: "montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--color-text-primary, #363636);
+}
+
+.pet-get-btn {
+  font-family: "montserrat", sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.65rem 1.75rem;
+  border: none;
+  border-radius: 999px;
+  background: var(--color-theme-secondary, #e81f76);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(232, 31, 118, 0.45);
+  transition: filter 0.15s ease, transform 0.1s ease;
+}
+
+.pet-get-btn:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+
+.pet-get-btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.pet-get-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+body.pets-page-only main {
+  padding-bottom: 5.5rem;
+}
+
+.pet-modal-root {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  pointer-events: none;
+}
+
+.pet-modal-root.is-open {
+  pointer-events: auto;
+}
+
+.pet-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(26, 26, 26, 0.55);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.pet-modal-root.is-open .pet-modal-backdrop {
+  opacity: 1;
+}
+
+.pet-modal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.96);
+  width: min(26rem, calc(100vw - 2rem));
+  max-height: min(90vh, 32rem);
+  overflow-y: auto;
+  padding: 1.35rem 1.35rem 1.5rem;
+  box-sizing: border-box;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  border: 2px solid rgba(232, 31, 118, 0.35);
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.pet-modal-root.is-open .pet-modal:not([hidden]) {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.pet-modal-title {
+  margin: 0 0 0.35rem;
+  font-family: "eds-market-regular-slant", sans-serif;
+  font-size: 1.65rem;
+  color: #1a1a1a;
+  text-align: center;
+}
+
+.pet-modal-sub {
+  margin: 0 0 1rem;
+  font-family: "montserrat", sans-serif;
+  font-size: 0.95rem;
+  color: #555;
+  text-align: center;
+}
+
+.pet-modal-list {
+  margin: 0 0 1rem;
+  padding: 0.65rem 0.85rem;
+  max-height: 9rem;
+  overflow-y: auto;
+  list-style: none;
+  background: var(--color-background-form, #f4f4f4);
+  border-radius: 10px;
+  border: 1px solid var(--color-border-form, #d4d4d4);
+}
+
+.pet-modal-list li {
+  font-family: "montserrat", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.pet-modal-list li:last-child {
+  border-bottom: none;
+}
+
+.pet-modal-label {
+  display: block;
+  font-family: "montserrat", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+  color: var(--color-text-primary, #363636);
+}
+
+.pet-modal-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.65rem 0.85rem;
+  font-family: "montserrat", sans-serif;
+  font-size: 1rem;
+  border: 2px solid var(--color-theme-secondary, #e81f76);
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.pet-modal-input.pet-input-error {
+  animation: pet-shake 0.45s ease;
+  border-color: #c4102a;
+}
+
+@keyframes pet-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-6px);
+  }
+  75% {
+    transform: translateX(6px);
+  }
+}
+
+.pet-modal-primary {
+  width: 100%;
+  font-family: "montserrat", sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 12px;
+  background: var(--color-theme-secondary, #e81f76);
+  color: #fff;
+  cursor: pointer;
+}
+
+.pet-modal-primary:hover {
+  filter: brightness(1.06);
+}
+
+.pet-modal--loading {
+  text-align: center;
+  padding: 2rem 1.5rem;
+}
+
+.pet-loading-spinner {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 1.25rem;
+  border-radius: 50%;
+  border: 4px solid rgba(232, 31, 118, 0.2);
+  border-top-color: var(--color-theme-secondary, #e81f76);
+  animation: pet-spin 0.85s linear infinite;
+}
+
+@keyframes pet-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.pet-loading-text {
+  margin: 0;
+  font-family: "montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.45;
+  color: var(--color-text-primary, #363636);
+  min-height: 3em;
+}
+
+.pet-modal--success {
+  text-align: center;
+  padding: 2rem 1.5rem;
+}
+
+.pet-success-check {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 1rem;
+  line-height: 72px;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #fff;
+  background: linear-gradient(145deg, #6abf4b, #2ed9c3);
+  border-radius: 50%;
+  box-shadow: 0 8px 24px rgba(106, 191, 75, 0.45);
+}
