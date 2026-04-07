@@ -365,3 +365,62 @@ html {
 /* ---- style block ---- */
 
 .css-2jqoj9{color:inherit;-webkit-text-decoration:none;text-decoration:none;border-radius:4px;}.css-2jqoj9:hover,.css-2jqoj9:focus{color:#00A0DF;-webkit-text-decoration:underline;text-decoration:underline;}.css-2jqoj9:active{color:#773DBD;}.css-2jqoj9:focus-visible{outline-width:2px;outline-style:dotted;outline-color:#00A0DF;outline-offset:3px;}@media (prefers-contrast: more){.css-2jqoj9{color:revert;}.css-2jqoj9:visited{color:inherit;}}
+
+/* Pets page — event banner (matches site typography / pink accent) */
+.pets-page-header-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.pets-page-header-row .css-1s9o2ew {
+  flex: 0 1 auto;
+}
+
+.pets-event-banner {
+  flex: 1 1 auto;
+  text-align: right;
+  margin-top: 1rem;
+  margin-right: calc(10px + 0.55vw);
+  min-width: min(100%, 12rem);
+}
+
+.pets-event-title {
+  margin: 0;
+  font-family: "eds-market-regular-slant", sans-serif;
+  font-size: clamp(1.1rem, 2.2vw, 1.85rem);
+  color: var(--color-text-primary, #363636);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.pets-event-timer {
+  margin: 0.4rem 0 0;
+  font-family: "montserrat", sans-serif;
+  font-weight: 700;
+  font-size: clamp(0.85rem, 1.6vw, 1.1rem);
+  color: var(--color-theme-secondary, #e81f76);
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 426px) {
+  .pets-page-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pets-event-banner {
+    text-align: left;
+    margin-left: 100px;
+    margin-right: 0;
+    margin-top: 0.25rem;
+  }
+
+  .pets-page-header-row .css-1s9o2ew {
+    margin-top: 0;
+  }
+}
