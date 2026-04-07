@@ -369,28 +369,36 @@ html {
 /* Pets page — event banner (matches site typography / pink accent) */
 .pets-page-header-row {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: flex-start;
-  justify-content: space-between;
-  gap: 0.75rem 1.5rem;
+  justify-content: flex-start;
+  gap: 0.75rem 1rem;
   width: 100%;
   box-sizing: border-box;
+  position: relative;
+  min-height: 4rem;
+  padding-right: min(22rem, 46vw);
 }
 
 .pets-page-header-row .css-1s9o2ew {
   flex: 0 1 auto;
+  min-width: 0;
 }
 
 .pets-event-banner {
-  flex: 1 1 auto;
+  position: absolute;
+  top: 0.35rem;
+  right: 0;
+  z-index: 15;
+  flex: none;
   text-align: right;
-  margin-top: 0.65rem;
-  margin-right: calc(10px + 0.55vw);
-  min-width: min(100%, 14rem);
-  padding: 0.35rem 0.5rem 0.45rem;
+  margin: 0;
+  max-width: min(22rem, calc(100% - 110px));
+  padding: 0.4rem 0.6rem 0.5rem;
   border-radius: 10px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(244, 244, 244, 0.55) 100%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(244, 244, 244, 0.75) 100%);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07), inset 0 0 0 1px rgba(232, 31, 118, 0.22);
+  pointer-events: none;
 }
 
 .pets-event-title {
@@ -417,15 +425,21 @@ html {
 
 @media (max-width: 426px) {
   .pets-page-header-row {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-wrap: wrap;
+    padding-right: 0;
+    min-height: 0;
   }
 
   .pets-event-banner {
-    text-align: left;
+    position: relative;
+    top: auto;
+    right: auto;
+    left: 0;
+    max-width: 100%;
+    margin-top: 0.35rem;
     margin-left: 100px;
-    margin-right: 0;
-    margin-top: 0.25rem;
+    text-align: left;
+    pointer-events: none;
   }
 
   .pets-page-header-row .css-1s9o2ew {
