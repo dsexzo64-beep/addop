@@ -627,7 +627,7 @@ body.pets-page-only main {
 .pet-modal-list {
   margin: 0 0 1rem;
   padding: 0.65rem 0.85rem;
-  max-height: 9rem;
+  max-height: 14rem;
   overflow-y: auto;
   list-style: none;
   background: var(--color-background-form, #f4f4f4);
@@ -635,16 +635,53 @@ body.pets-page-only main {
   border: 1px solid var(--color-border-form, #d4d4d4);
 }
 
-.pet-modal-list li {
+.pet-modal-list-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   font-family: "montserrat", sans-serif;
   font-size: 0.9rem;
   font-weight: 600;
-  padding: 0.35rem 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
-.pet-modal-list li:last-child {
+.pet-modal-list-item:last-child {
   border-bottom: none;
+}
+
+.pet-modal-list-thumb {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  object-fit: cover;
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.pet-modal-list-thumb--empty {
+  position: relative;
+}
+
+.pet-modal-list-thumb--empty::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: 4px;
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(0, 0, 0, 0.06),
+    rgba(0, 0, 0, 0.06) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+}
+
+.pet-modal-list-name {
+  flex: 1;
+  min-width: 0;
+  color: var(--color-text-primary, #363636);
 }
 
 .pet-modal-label {

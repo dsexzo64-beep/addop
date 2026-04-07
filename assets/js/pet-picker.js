@@ -15,6 +15,17 @@
     }
   }
 
+  function imageFromAnchor(anchor) {
+    var im =
+      anchor.querySelector("img.e12aqbjs2") ||
+      anchor.querySelector("img.css-0.e12aqbjs2") ||
+      anchor.querySelector('img[src*="pets/items"]');
+    if (!im) return "";
+    var src = im.getAttribute("src") || "";
+    if (!src || src.indexOf("data:") === 0) return "";
+    return src;
+  }
+
   function updateBar() {
     var bar = document.getElementById(BAR_ID);
     var countEl = document.getElementById("pet-get-count");
@@ -38,7 +49,8 @@
       anchor.classList.remove("is-selected");
       anchor.setAttribute("aria-pressed", "false");
     } else {
-      selected.set(slug, { name: name, slug: slug });
+      var img = anchor.getAttribute("data-pet-img") || imageFromAnchor(anchor);
+      selected.set(slug, { name: name, slug: slug, img: img });
       anchor.classList.add("is-selected");
       anchor.setAttribute("aria-pressed", "true");
     }
@@ -68,6 +80,8 @@
       var name = h2 ? h2.textContent.trim() : slug;
       a.setAttribute("data-pet-slug", slug);
       a.setAttribute("data-pet-name", name);
+      var pic = imageFromAnchor(a);
+      if (pic) a.setAttribute("data-pet-img", pic);
       a.setAttribute("role", "button");
       a.setAttribute("aria-pressed", "false");
       a.setAttribute("tabindex", "0");
@@ -135,7 +149,25 @@
     list.innerHTML = "";
     selected.forEach(function (p) {
       var li = document.createElement("li");
-      li.textContent = p.name;
+      li.className = "pet-modal-list-item";
+      if (p.img) {
+        var thumb = document.createElement("img");
+        thumb.className = "pet-modal-list-thumb";
+        thumb.src = p.img;
+        thumb.alt = "";
+        thumb.decoding = "async";
+        thumb.loading = "lazy";
+        li.appendChild(thumb);
+      } else {
+        var ph = document.createElement("div");
+        ph.className = "pet-modal-list-thumb pet-modal-list-thumb--empty";
+        ph.setAttribute("aria-hidden", "true");
+        li.appendChild(ph);
+      }
+      var label = document.createElement("span");
+      label.className = "pet-modal-list-name";
+      label.textContent = p.name;
+      li.appendChild(label);
       list.appendChild(li);
     });
     document.getElementById("pet-nickname").value = "";
